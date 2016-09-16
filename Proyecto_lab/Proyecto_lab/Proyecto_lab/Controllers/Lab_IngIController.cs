@@ -69,8 +69,10 @@ namespace Proyecto_lab.Controllers
             }
         }
 
-
-
+        public ActionResult Details()
+        {
+            return View();
+        }
 
     }
 }

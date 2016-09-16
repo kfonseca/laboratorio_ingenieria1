@@ -1,0 +1,54 @@
+﻿@model Proyecto_lab.Models.ModeloIntermedio
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div>
+    <h4> Cliente </h4>
+    <hr />
+    <dl class= "dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloCliente.cedula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.cedula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloCliente.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloCliente.apellido1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.apellido1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloCliente.apellido2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.apellido2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloCliente.correo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.correo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloCliente.direccion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.modeloCliente.direccion)
+        </dd>
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>
