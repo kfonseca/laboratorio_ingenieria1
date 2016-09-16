@@ -1,0 +1,73 @@
+﻿@model Proyecto_lab.Models.ModeloIntermedio
+
+@{
+    ViewBag.Title = "Lista de teléfonos y cuentas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class= "table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            1er Apellido
+        </th>
+        <th>
+            2do Apellido
+        </th>
+        <th>
+            Telefonos
+        </th>
+        <th>
+            Cuentas
+        </th>
+    </tr>
+
+@for(int i = 0; i < Model.listaClientes.Count; i++)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.listaClientes.ElementAt(i).nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.listaClientes.ElementAt(i).apellido1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.listaClientes.ElementAt(i).apellido2)
+        </td>
+        <td>
+            @for(int j = 0; j < Model.listaTelefonos.Count; j++)
+            {
+                if (Model.listaClientes.ElementAt(i).cedula.Equals(Model.listaTelefonos.ElementAt(j).cedula))
+                {
+                    @Html.DisplayFor(ModelItem => Model.listaTelefonos.ElementAt(j).numero)
+                    @Html.Raw(" ")
+                }
+            }
+        </td>
+        <td>
+            @for(int k = 0; k < Model.listaCuentas.Count; k++)
+            {
+                if (Model.listaClientes.ElementAt(i).cedula.Equals(Model.listaCuentas.ElementAt(k).cedula))
+                {
+                    @Html.DisplayFor(ModelItem => Model.listaCuentas.ElementAt(k).numero)
+                    @Html.Raw(" ")
+                }
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = Model.listaClientes.ElementAt(i).cedula }) |
+            @Html.ActionLink("Detalles","Details", new { id = Model.listaClientes.ElementAt(i).cedula }) |
+            @Html.ActionLink("Borrar", "Delete", new { id = Model.listaClientes.ElementAt(i).cedula })
+        </td>
+    </tr>
+}
+</table>
+
+

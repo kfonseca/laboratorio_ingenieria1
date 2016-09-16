@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_B02441Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="cedula" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="20" />
+    <Property Name="correo" Type="varchar" MaxLength="20" />
+    <Property Name="apellido2" Type="varchar" MaxLength="15" />
+    <Property Name="apellido1" Type="varchar" MaxLength="15" />
+    <Property Name="nombre" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="cedula" />
+      <PropertyRef Name="numero" />
+    </Key>
+    <Property Name="cedula" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="numero" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="7" />
+  </EntityType>
+  <EntityType Name="Telefono">
+    <Key>
+      <PropertyRef Name="cedula" />
+      <PropertyRef Name="numero" />
+    </Key>
+    <Property Name="cedula" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="numero" Type="char" MaxLength="8" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Cliente_Telefono">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="Telefono">
+        <PropertyRef Name="cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_B02441ModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cliente_Telefono" Association="Self.FK_Cliente_Telefono">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Telefono" EntitySet="Telefono" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

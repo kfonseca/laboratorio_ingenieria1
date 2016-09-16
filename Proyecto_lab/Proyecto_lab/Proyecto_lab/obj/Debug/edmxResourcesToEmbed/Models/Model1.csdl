@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_B02441Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="cedula" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="correo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="apellido2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="apellido1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Telefono" Relationship="Self.FK_Cliente_Telefono" FromRole="Cliente" ToRole="Telefono" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="cedula" />
+      <PropertyRef Name="numero" />
+    </Key>
+    <Property Name="cedula" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="numero" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Telefono">
+    <Key>
+      <PropertyRef Name="cedula" />
+      <PropertyRef Name="numero" />
+    </Key>
+    <Property Name="cedula" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="numero" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Telefono" FromRole="Telefono" ToRole="Cliente" />
+  </EntityType>
+  <Association Name="FK_Cliente_Telefono">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="cedula" />
+      </Principal>
+      <Dependent Role="Telefono">
+        <PropertyRef Name="cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_B02441Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+    <EntitySet Name="Telefono" EntityType="Self.Telefono" />
+    <AssociationSet Name="FK_Cliente_Telefono" Association="Self.FK_Cliente_Telefono">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Telefono" EntitySet="Telefono" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
